@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIFont *customFont;
 @property (nonatomic, assign) bool pop;
 @property (nonatomic, assign) bool parallax;
+@property (nonatomic, assign) bool bg;
 @property (nonatomic, assign) NSInteger numberOfButtons;
 
 @end
@@ -33,6 +34,7 @@
     _pop = true;
     _parallax = true;
     _customFont = nil;
+    _bg = false;
     
     _segmentControl.selectedSegmentIndex = _numberOfButtons;
     _animatedSwitch.on = _animated;
@@ -40,6 +42,7 @@
     _popSwitch.on = _pop;
     _parallaxSwitch.on = _parallax;
     _fontSwitch.on = _customFont ? true : false;
+    _bgSwitch.on = _bg;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,6 +54,7 @@
     self.alertView.size = CGSizeMake(280, 230);
     self.alertView.popAnimation = _pop;
     self.alertView.parallaxEffect = _parallax;
+    self.alertView.backgroundShadow = _bg;
     
     __weak typeof(self)weakSelf = self;
     
@@ -150,6 +154,11 @@
     } else {
         _customFont = nil;
     }
+}
+
+- (IBAction)bgSwitch:(id)sender {
+    UISwitch *bgSwitch = (UISwitch *)sender;
+    _bg = bgSwitch.isOn;
 }
 
 @end

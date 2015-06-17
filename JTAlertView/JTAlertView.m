@@ -30,6 +30,7 @@ const static CGFloat kTitleFontSize = 21.0;
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UITapGestureRecognizer *gestureRecognizer;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @end
 
@@ -62,6 +63,9 @@ const static CGFloat kTitleFontSize = 21.0;
     
     // Notifications
     [self createObservers];
+    
+    // Background
+    [self createBackgroundView];
     
     return self;
 }
@@ -221,6 +225,18 @@ const static CGFloat kTitleFontSize = 21.0;
     }
 }
 
+- (void)createBackgroundView {
+    self.backgroundView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.5];
+    self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.backgroundView.alpha = 0.0;
+}
+
+- (void)addBackgroundBelowAlertView {
+    [self.backgroundView removeFromSuperview];
+    [[UIApplication sharedApplication].keyWindow insertSubview:self.backgroundView belowSubview:self];
+}
+
 #pragma mark - Displaying
 - (void)show {
     [self showInSuperview:[[UIApplication sharedApplication] keyWindow] withCompletion:nil animated:true];
@@ -249,9 +265,13 @@ const static CGFloat kTitleFontSize = 21.0;
     }
     [superView addSubview:self];
     
+    // Add gradient
+    _backgroundShadow ? [self addBackgroundBelowAlertView] : nil;
+    
     // Animation
     [UIView animateWithDuration:animationDuration animations:^{
         [self fullAlpha];
+        self.backgroundView.alpha = 1.0;
         _popAnimation ? [self popAnimationForView:self withDuration:animationDuration] : nil;
         
     } completion:^(BOOL finished) {
@@ -280,6 +300,7 @@ const static CGFloat kTitleFontSize = 21.0;
     animationDuration = animated ? kAnimatingDuration : 0;
     [UIView animateWithDuration:animationDuration animations:^{
         [self noAlpha];
+        self.backgroundView.alpha = 0.0;
         [UIView animateWithDuration:animationDuration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
             self.transform = CGAffineTransformMakeScale(0.95, 0.95);
         } completion:nil];
@@ -292,6 +313,7 @@ const static CGFloat kTitleFontSize = 21.0;
         [self removeFromSuperview];
         [_imgView removeFromSuperview];
         [_titleLabel removeFromSuperview];
+        [self.backgroundView removeFromSuperview];
         if (completion) {
             completion();
         }
@@ -336,6 +358,7 @@ const static CGFloat kTitleFontSize = 21.0;
     _font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:kTitleFontSize];
     _titleColor = [UIColor whiteColor];
     _titleShadow = true;
+    _backgroundShadow = false;
 }
 
 - (void)noAlpha {

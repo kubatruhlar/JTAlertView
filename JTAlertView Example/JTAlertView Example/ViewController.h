@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *popSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *parallaxSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *fontSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *bgSwitch;
 
 - (IBAction)showPressed:(id)sender;
 
@@ -26,6 +27,7 @@
 - (IBAction)popSwitch:(id)sender;
 - (IBAction)parallaxSwitch:(id)sender;
 - (IBAction)fontSwitch:(id)sender;
+- (IBAction)bgSwitch:(id)sender;
 
 @end
 

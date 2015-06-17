@@ -21,10 +21,10 @@ typedef NS_ENUM(NSInteger, JTAlertViewStyle) {
 @property (nonatomic, assign) CGSize size;
 
 /** Pop animation of the alertView when shows and pressed (Disable animated show will also disable pop show animation). Default is YES. */
-@property (nonatomic, assign) bool popAnimation;
+@property (nonatomic, assign, getter=isPopAnimation) bool popAnimation;
 
 /** Beautiful parallax effect of image within alertView. Default is YES. */
-@property (nonatomic, assign) bool parallaxEffect;
+@property (nonatomic, assign, getter=isParallaxEffect) bool parallaxEffect;
 
 /** Image overlay. Default overlay is gray with half alpha. */
 @property (nonatomic, strong) UIColor *overlayColor;
@@ -36,7 +36,10 @@ typedef NS_ENUM(NSInteger, JTAlertViewStyle) {
 @property (nonatomic, strong) UIColor *titleColor;
 
 /** Shadow underneath the title. Default is YES. */
-@property (nonatomic, assign) bool titleShadow;
+@property (nonatomic, assign, getter=isTitleShadow) bool titleShadow;
+
+/** Shadow underneath the alertView. Default is NO. */
+@property (nonatomic, assign, getter=isBackgroundShadow) bool backgroundShadow;
 
 // Initializers
 + (instancetype)alertWithTitle:(NSString *)titleText andImage:(UIImage *)image;

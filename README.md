@@ -46,7 +46,7 @@ self.alertView.size = CGSizeMake(280, 230);
 
 ### Properties:
 
-You must setup `size` property or the default will be used. `popAnimation` is visible while displaying and if you tap on the dialog. The `overlayColor` above given image and decent `titleShadow` make title better readable. The `font` property (it's `style` and `size`) is applied to title and buttons (`style` only). To customize particular buttons, use `font` parameter in buttons adding methods (*see below*).
+You must setup `size` property or the default will be used. `popAnimation` is visible while displaying and if you tap on the dialog. The `overlayColor` above given image and decent `titleShadow` make title better readable. The `backgroundShadow` creates decent shadow under the alertView. The `font` property (it's `style` and `size`) is applied to title and buttons (`style` only). To customize particular buttons, use `font` parameter in buttons adding methods (*see below*).
 
 ```objective-c
 @property (nonatomic, assign) CGSize size;
@@ -58,6 +58,7 @@ You must setup `size` property or the default will be used. `popAnimation` is vi
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong) UIColor *titleColor;
 @property (nonatomic, assign) bool titleShadow;
+@property (nonatomic, assign) bool backgroundShadow;
 ```
 
 
@@ -88,6 +89,9 @@ You can show **JTAlertView** `withCompletion` block, in specific `superview`, `a
 
 
 ## Changelog
+
+### v1.0.1 - 06.18.15
+- [**NEW**] BackgroundShadow added
 
 ### v1.0.0 - 06.17.15
 - [**NEW**] Initial commit
