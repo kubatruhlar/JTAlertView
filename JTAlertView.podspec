@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/kubatru/JTAlertView"
-  s.screenshots  = "https://github.com/kubatru/JTAlertView/blob/master/Screens/alertView.png"
+  s.screenshots  = "https://raw.githubusercontent.com/kubatru/JTAlertView/master/Screens/alertView.png"
 
   s.license      = { :type => "MIT", :file => "LICENSE.md" }
   s.author    = "Jakub Truhlar"
