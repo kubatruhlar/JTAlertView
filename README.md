@@ -90,6 +90,9 @@ You can show **JTAlertView** `withCompletion` block, in specific `superview`, `a
 
 ## Changelog
 
+### v1.0.2 - 06.23.15
+- [**FIX**] README.md updated
+
 ### v1.0.1 - 06.18.15
 - [**NEW**] BackgroundShadow added
 
