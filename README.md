@@ -1,3 +1,7 @@
+[![Version](https://img.shields.io/cocoapods/v/JTAlertView.svg)](http://cocoapods.org/pods/JTAlertView)
+[![License](https://img.shields.io/cocoapods/l/JTAlertView.svg)](http://cocoapods.org/pods/JTAlertView)
+[![Platform](https://img.shields.io/cocoapods/p/JTAlertView.svg)](http://cocoapods.org/pods/JTAlertView)
+
 # JTAlertView
 
 **JTAlertView** is the new **wonderful dialog/HUD/alert** kind of View. It was also designed to cover user’s needs during **customization**. Created with **delightful combination** of image, parallax and pop effects, **JTAlertView** improves your user experience.
