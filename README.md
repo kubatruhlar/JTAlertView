@@ -7,7 +7,7 @@
 **JTAlertView** is the new **wonderful dialog/HUD/alert** kind of View. It was also designed to cover user’s needs during **customization**. Created with **delightful combination** of image, parallax and pop effects, **JTAlertView** improves your user experience.
 
 <h3 align="center">
-  <img src="https://github.com/kubatru/JTAlertView/blob/master/Screens/alertView.png" alt="Example" width="600"/>
+  <img src="https://github.com/kubatruhlar/JTAlertView/blob/master/Screens/alertView.png" alt="Example" width="600"/>
 </h3>
 
 ## Installation
@@ -24,8 +24,8 @@ You may also quick try the example project with
 > **Works in both - Portrait and Landscape modes**
 
 <h3 align="center">
-  <img src="https://github.com/kubatru/JTAlertView/blob/master/Screens/parallax.gif" alt="Parallax" width="280"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/kubatru/JTAlertView/blob/master/Screens/popanimated.gif" alt="Example" width="250"/>
+  <img src="https://github.com/kubatruhlar/JTAlertView/blob/master/Screens/parallax.gif" alt="Parallax" width="280"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/kubatruhlar/JTAlertView/blob/master/Screens/popanimated.gif" alt="Example" width="250"/>
 </h3>
 
 ## Usage and Customization
