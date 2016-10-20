@@ -86,65 +86,62 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
-    [self addButtonWithTitle:titleText font:nil style:style forControlEvents:controlEvents styling:nil action:action];
+    [self addButtonWithTitle:titleText font:nil style:style forControlEvents:controlEvents action:action];
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
-    [self addButtonWithTitle:titleText font:font style:style forControlEvents:controlEvents styling:nil action:action];
+    
+    JTAlertViewStyling styling = ^(UIButton* btn) {
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor whiteColor]];
+        if (!font) {
+            switch (style) {
+                case JTAlertViewStyleDefault:
+                    btn.titleLabel.font = [_font fontWithSize:kBtnFontSize];
+                    break;
+                case JTAlertViewStyleCancel:
+                    btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
+                    break;
+                case JTAlertViewStyleDestructive:
+                    btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
+                    
+                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (style) {
+                case JTAlertViewStyleDefault:
+                    btn.titleLabel.font = font;
+                    break;
+                case JTAlertViewStyleCancel:
+                    btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
+                    break;
+                case JTAlertViewStyleDestructive:
+                    btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
+                    
+                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+    
+    [self addButtonWithTitle:titleText styling:styling forControlEvents:controlEvents action:action];
 }
 
-- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents styling:(void (^)(UIButton *button))styling action:(void (^)(JTAlertView *alertView))action {
+- (void)addButtonWithTitle:(NSString *)titleText styling:(JTAlertViewStyling)styling forControlEvents:(UIControlEvents)controlEvents  action:(void (^)(JTAlertView *alertView))action {
     
     UIBlockButton *btn = [UIBlockButton buttonWithType:UIButtonTypeSystem];
     
     if (styling != nil) {
         styling(btn);
     }
-    else {
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor whiteColor]];
-    }
     
     [btn setTitle:titleText forState:UIControlStateNormal];
     [btn handleControlEvent:controlEvents withBlock:action];
-    
-    if (!font) {
-        switch (style) {
-            case JTAlertViewStyleDefault:
-                btn.titleLabel.font = [_font fontWithSize:kBtnFontSize];
-                break;
-            case JTAlertViewStyleCancel:
-                btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
-                break;
-            case JTAlertViewStyleDestructive:
-                btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
-                
-                if (styling == nil) {
-                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
-                }
-                break;
-            default:
-                break;
-        }
-    } else {
-        switch (style) {
-            case JTAlertViewStyleDefault:
-                btn.titleLabel.font = font;
-                break;
-            case JTAlertViewStyleCancel:
-                btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
-                break;
-            case JTAlertViewStyleDestructive:
-                btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
-                
-                if (styling == nil) {
-                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
-                }
-                break;
-            default:
-                break;
-        }
-    }
     
     [self.btns addObject:btn];
     
