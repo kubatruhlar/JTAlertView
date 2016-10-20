@@ -179,7 +179,7 @@ const static CGFloat kTitleFontSize = 21.0;
 
 - (void)addSeparatorInView:(UIView *)superview withTag:(NSInteger)tag andFrame:(CGRect)frame {
     UIView *separator = [[UIView alloc] initWithFrame:frame];
-    separator.backgroundColor = [UIColor colorWithWhite:kSeparatorColorValue alpha:1.0];
+    separator.backgroundColor = self.separatorColor;
     separator.tag = tag;
     [superview insertSubview:separator atIndex:2];
 }
@@ -373,6 +373,7 @@ const static CGFloat kTitleFontSize = 21.0;
     _titleColor = [UIColor whiteColor];
     _titleShadow = true;
     _backgroundShadow = false;
+    _separatorColor = [UIColor colorWithWhite:kSeparatorColorValue alpha:1.0];
 }
 
 - (void)noAlpha {

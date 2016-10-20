@@ -33,6 +33,9 @@ typedef void (^JTAlertViewStyling)(UIButton* btn);
 /** Image overlay. Default overlay is gray with half alpha. */
 @property (nonatomic, strong) UIColor *overlayColor;
 
+/** Button separator color. Default is 97% white. */
+@property (nonatomic, strong) UIColor *separatorColor;
+
 /** Font applied on title and alertView buttons. AlertView buttons will ignore this font's size but not the style (In case you want to setup custom font for your buttons, use font parameter in method instead). Default is Helvetica Neue Medium with 21.0 size. */
 @property (nonatomic, strong) UIFont *font;
 
