@@ -118,7 +118,10 @@ const static CGFloat kTitleFontSize = 21.0;
                 break;
             case JTAlertViewStyleDestructive:
                 btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
-                [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                
+                if (styling == nil) {
+                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                }
                 break;
             default:
                 break;
@@ -133,7 +136,10 @@ const static CGFloat kTitleFontSize = 21.0;
                 break;
             case JTAlertViewStyleDestructive:
                 btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
-                [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                
+                if (styling == nil) {
+                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                }
                 break;
             default:
                 break;
