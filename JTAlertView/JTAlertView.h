@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface JTAlertView : UIView
 
 /** In Cancel and Destructive case JTAlertView will try to use bold version of your font (Must be in format FontName-Bold) */
@@ -42,21 +44,21 @@ typedef NS_ENUM(NSInteger, JTAlertViewStyle) {
 @property (nonatomic, assign, getter=isBackgroundShadow) bool backgroundShadow;
 
 // Initializers
-+ (instancetype)alertWithTitle:(NSString *)titleText andImage:(UIImage *)image;
-- (instancetype)initWithTitle:(NSString *)titleText andImage:(UIImage *)image;
++ (instancetype)alertWithTitle:(NSString * _Nullable)titleText andImage:(UIImage * _Nullable)image;
+- (instancetype)initWithTitle:(NSString * _Nullable)titleText andImage:(UIImage * _Nullable)image;
 
 // Buttons
 - (void)addButtonWithTitle:(NSString *)titleText action:(void (^)(JTAlertView *alertView))action;
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style action:(void (^)(JTAlertView *alertView))action;
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
-- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
-- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents styling:(void (^)(UIButton *button))styling action:(void (^)(JTAlertView *alertView))action;
+- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont * _Nullable )font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
+- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont * _Nullable)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents styling:(void (^ _Nullable)(UIButton *button))styling action:(void (^)(JTAlertView *alertView))action;
 
 // Displaying
 - (void)show;
-- (void)showInSuperview:(UIView *)superView withCompletion:(void (^)())completion animated:(bool)animated;
+- (void)showInSuperview:(UIView *)superView withCompletion:(void (^ _Nullable)())completion animated:(bool)animated;
 - (void)hide;
-- (void)hideWithCompletion:(void (^)())completion animated:(bool)animated;
+- (void)hideWithCompletion:( void (^ _Nullable )())completion animated:(bool)animated;
 - (void)hideWithDelay:(NSTimeInterval)delay animated:(bool)animated;
 
 @end
@@ -70,3 +72,5 @@ typedef void (^ActionBlock)(JTAlertView *alertView);
 - (void)handleControlEvent:(UIControlEvents)event withBlock:(ActionBlock)action;
 
 @end
+
+NS_ASSUME_NONNULL_END
