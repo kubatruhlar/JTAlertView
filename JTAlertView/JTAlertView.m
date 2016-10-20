@@ -86,14 +86,25 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
-    [self addButtonWithTitle:titleText font:nil style:style forControlEvents:controlEvents action:action];
+    [self addButtonWithTitle:titleText font:nil style:style forControlEvents:controlEvents styling:nil action:action];
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
+    [self addButtonWithTitle:titleText font:font style:style forControlEvents:controlEvents styling:nil action:action];
+}
+
+- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents styling:(void (^)(UIButton *button))styling action:(void (^)(JTAlertView *alertView))action {
     
     UIBlockButton *btn = [UIBlockButton buttonWithType:UIButtonTypeSystem];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn setBackgroundColor:[UIColor whiteColor]];
+    
+    if (styling != nil) {
+        styling(btn);
+    }
+    else {
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor whiteColor]];
+    }
+    
     [btn setTitle:titleText forState:UIControlStateNormal];
     [btn handleControlEvent:controlEvents withBlock:action];
     
