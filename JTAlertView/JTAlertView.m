@@ -76,12 +76,10 @@ const static CGFloat kTitleFontSize = 21.0;
 
 #pragma mark - Buttons handle
 - (void)addButtonWithTitle:(NSString *)titleText action:(void (^)(JTAlertView *alertView))action {
-    
     [self addButtonWithTitle:titleText style:JTAlertViewStyleDefault action:action];
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style action:(void (^)(JTAlertView *alertView))action {
-    
     [self addButtonWithTitle:titleText style:style forControlEvents:UIControlEventTouchUpInside action:action];
 }
 
@@ -90,7 +88,6 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
-    
     JTAlertViewStyling styling = ^(UIButton* btn) {
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor whiteColor]];
@@ -132,8 +129,7 @@ const static CGFloat kTitleFontSize = 21.0;
     [self addButtonWithTitle:titleText styling:styling forControlEvents:controlEvents action:action];
 }
 
-- (void)addButtonWithTitle:(NSString *)titleText styling:(JTAlertViewStyling)styling forControlEvents:(UIControlEvents)controlEvents  action:(void (^)(JTAlertView *alertView))action {
-    
+- (void)addButtonWithTitle:(NSString *)titleText styling:(JTAlertViewStyling)styling forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
     UIBlockButton *btn = [UIBlockButton buttonWithType:UIButtonTypeSystem];
     
     if (styling != nil) {
@@ -257,7 +253,6 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)showInSuperview:(UIView *)superView withCompletion:(void (^)())completion animated:(bool)animated {
-    
     if (self.btns.count == 0) {
         [self applyAppearanceConsideringButtons:false];
     } else {
