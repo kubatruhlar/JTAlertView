@@ -88,7 +88,7 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
-    JTAlertViewStyling styling = ^(UIButton* btn) {
+    JTAlertViewStyling styling = ^(UIButton *btn) {
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor whiteColor]];
         if (!font) {

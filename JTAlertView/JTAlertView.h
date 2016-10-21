@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, JTAlertViewStyle) {
     JTAlertViewStyleDestructive
 };
 
-typedef void (^JTAlertViewStyling)(UIButton* btn);
+typedef void (^JTAlertViewStyling)(UIButton *btn);
 
 // Public properties
 /** Size of the alertView. Default is 240.0, 290.0. */
@@ -56,7 +56,7 @@ typedef void (^JTAlertViewStyling)(UIButton* btn);
 - (void)addButtonWithTitle:(NSString *)titleText action:(void (^)(JTAlertView *alertView))action;
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style action:(void (^)(JTAlertView *alertView))action;
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
-- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont * _Nullable )font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
+- (void)addButtonWithTitle:(NSString *)titleText font:(UIFont * _Nullable)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
 
 /** Designated method to adda a button. Provide a styling block to update custom styling to provided button, overriding default JTAlertViewStyle parameter and font. */
 - (void)addButtonWithTitle:(NSString *)titleText styling:(JTAlertViewStyling _Nullable)styling forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action;
