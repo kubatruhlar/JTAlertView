@@ -76,12 +76,10 @@ const static CGFloat kTitleFontSize = 21.0;
 
 #pragma mark - Buttons handle
 - (void)addButtonWithTitle:(NSString *)titleText action:(void (^)(JTAlertView *alertView))action {
-    
     [self addButtonWithTitle:titleText style:JTAlertViewStyleDefault action:action];
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText style:(JTAlertViewStyle)style action:(void (^)(JTAlertView *alertView))action {
-    
     [self addButtonWithTitle:titleText style:style forControlEvents:UIControlEventTouchUpInside action:action];
 }
 
@@ -90,44 +88,56 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)addButtonWithTitle:(NSString *)titleText font:(UIFont *)font style:(JTAlertViewStyle)style forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
+    JTAlertViewStyling styling = ^(UIButton *btn) {
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor whiteColor]];
+        if (!font) {
+            switch (style) {
+                case JTAlertViewStyleDefault:
+                    btn.titleLabel.font = [_font fontWithSize:kBtnFontSize];
+                    break;
+                case JTAlertViewStyleCancel:
+                    btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
+                    break;
+                case JTAlertViewStyleDestructive:
+                    btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
+                    
+                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (style) {
+                case JTAlertViewStyleDefault:
+                    btn.titleLabel.font = font;
+                    break;
+                case JTAlertViewStyleCancel:
+                    btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
+                    break;
+                case JTAlertViewStyleDestructive:
+                    btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
+                    
+                    [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     
+    [self addButtonWithTitle:titleText styling:styling forControlEvents:controlEvents action:action];
+}
+
+- (void)addButtonWithTitle:(NSString *)titleText styling:(JTAlertViewStyling)styling forControlEvents:(UIControlEvents)controlEvents action:(void (^)(JTAlertView *alertView))action {
     UIBlockButton *btn = [UIBlockButton buttonWithType:UIButtonTypeSystem];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn setBackgroundColor:[UIColor whiteColor]];
+    
+    if (styling != nil) {
+        styling(btn);
+    }
+    
     [btn setTitle:titleText forState:UIControlStateNormal];
     [btn handleControlEvent:controlEvents withBlock:action];
-    
-    if (!font) {
-        switch (style) {
-            case JTAlertViewStyleDefault:
-                btn.titleLabel.font = [_font fontWithSize:kBtnFontSize];
-                break;
-            case JTAlertViewStyleCancel:
-                btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
-                break;
-            case JTAlertViewStyleDestructive:
-                btn.titleLabel.font = [self boldForFont:_font withSize:kBtnFontSize] ? [self boldForFont:_font withSize:kBtnFontSize] : [_font fontWithSize:kBtnFontSize];
-                [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
-                break;
-            default:
-                break;
-        }
-    } else {
-        switch (style) {
-            case JTAlertViewStyleDefault:
-                btn.titleLabel.font = font;
-                break;
-            case JTAlertViewStyleCancel:
-                btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
-                break;
-            case JTAlertViewStyleDestructive:
-                btn.titleLabel.font = [self boldForFont:font withSize:font.pointSize] ? [self boldForFont:font withSize:font.pointSize] : font;
-                [btn setTitleColor:[UIColor colorWithRed:0.906 green:0.298 blue:0.235 alpha:1] forState:UIControlStateNormal];
-                break;
-            default:
-                break;
-        }
-    }
     
     [self.btns addObject:btn];
     
@@ -165,7 +175,7 @@ const static CGFloat kTitleFontSize = 21.0;
 
 - (void)addSeparatorInView:(UIView *)superview withTag:(NSInteger)tag andFrame:(CGRect)frame {
     UIView *separator = [[UIView alloc] initWithFrame:frame];
-    separator.backgroundColor = [UIColor colorWithWhite:kSeparatorColorValue alpha:1.0];
+    separator.backgroundColor = self.separatorColor;
     separator.tag = tag;
     [superview insertSubview:separator atIndex:2];
 }
@@ -243,7 +253,6 @@ const static CGFloat kTitleFontSize = 21.0;
 }
 
 - (void)showInSuperview:(UIView *)superView withCompletion:(void (^)())completion animated:(bool)animated {
-    
     if (self.btns.count == 0) {
         [self applyAppearanceConsideringButtons:false];
     } else {
@@ -359,6 +368,7 @@ const static CGFloat kTitleFontSize = 21.0;
     _titleColor = [UIColor whiteColor];
     _titleShadow = true;
     _backgroundShadow = false;
+    _separatorColor = [UIColor colorWithWhite:kSeparatorColorValue alpha:1.0];
 }
 
 - (void)noAlpha {
